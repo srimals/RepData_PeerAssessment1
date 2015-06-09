@@ -1,9 +1,4 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
----
+# Reproducible Research: Peer Assessment 1
 
 
 ## Loading and preprocessing the data
@@ -12,26 +7,23 @@ Show any code that is needed to
 
 1. Load the data (i.e. read.csv())
 
-```{r loaddata, echo=TRUE}
 
+```r
 library(data.table)
 
 activity <- read.csv("activity.csv")
 activity <- na.omit(activity)
 
 actData <- data.table(activity)
-
 ```
 
 2. Process/transform the data (if necessary) into a format suitable for your analysis
 
 
-```{r process/transform, echo=TRUE}
 
+```r
 actData <- actData[,steps:=as.numeric(steps)]
 actData <- actData[,date :=as.Date(date)]
-
-
 ```
 
 
@@ -41,32 +33,44 @@ For this part of the assignment, you can ignore the missing values in the datase
 
 1. Calculate the total number of steps taken per day
 
-```{r TotalStepsTakenByDate, echo=TRUE}
+
+```r
 plotdata <- actData[,sum(steps), by=date]
 setnames(plotdata, c("date","V1"), c("Date","TotalSteps"))
-
 ```
 
 2. If you do not understand the difference between a histogram and a barplot, research the difference between them. Make a histogram of the total number of steps taken each day
 
-```{r GenerateHistogram, echo=TRUE}
+
+```r
 hist(plotdata$TotalSteps, main="Total steps taken by daily", xlab="steps taken", 
      ylab="frequency", breaks=15, col="blue")
-
 ```
+
+![](PA1_template_files/figure-html/GenerateHistogram-1.png) 
 
 3. Calculate and report the mean and median of the total number of steps taken per day
 
 Average steps taken per day
 ---------------------------
-```{r AverageStepsPerDay, echo=TRUE}
+
+```r
 mean(plotdata$TotalSteps)
+```
+
+```
+## [1] 10766.19
 ```
 Median
 ------
 
-```{r Median, echo=TRUE}
+
+```r
 median(plotdata$TotalSteps)
+```
+
+```
+## [1] 10765
 ```
 
 
