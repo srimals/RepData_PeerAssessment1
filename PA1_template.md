@@ -127,9 +127,9 @@ Calculate and report the total number of missing values in the dataset (i.e. the
 
 ANSWER: Number of days/intervals where there are missing values (coded as NA) is <span style="background-color:yellow"> 2304 </span>
 
-    Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
+Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
 
-    Create a new dataset that is equal to the original dataset but with the missing data filled in.
+Create a new dataset that is equal to the original dataset but with the missing data filled in.
     
 
 ```r
@@ -140,7 +140,7 @@ mocked.activity$avg <- NULL
 mocked.activity <- rename(mocked.activity, c("mockedsteps"="steps"))
 ```
 
-    Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
+Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
 
 
 ```r
@@ -184,9 +184,9 @@ median(plot.mock.data$TotalSteps)
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-    Create a new factor variable in the dataset with two levels - "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.
+Create a new factor variable in the dataset with two levels - "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.
 
-    Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). See the README file in the GitHub repository to see an example of what this plot should look like using simulated data.
+Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). See the README file in the GitHub repository to see an example of what this plot should look like using simulated data.
     
 
 ```r
@@ -214,18 +214,20 @@ rename(mock.table.by.weektype.and.interval, c("V1"="avg"))
 ```r
 library(lattice)
 
-p <- xyplot(avg ~ interval | factor(weektype), data=mock.table.by.weektype.and.interval, 
+panel.plot <- xyplot(avg ~ interval | factor(weektype), data=mock.table.by.weektype.and.interval, 
        type = 'l',
        main="Comparision of Average steps by Interval between weekend and weekdays",
        xlab="Interval in 5 minutes",
        ylab="Average # of Steps Taken")
-print (p)
+print (panel.plot)
 ```
 
 ![](PA1_template_files/figure-html/prepare.and.show.weekday.weekend.pattern-1.png) 
 
 Findings: Theres more activity on weekends than weekdays.
 
+## Conclusion :
 
+Data prepration is done as per directions. Missing values are filled using Averages. Comparison between missing values are found.
+Comparison between weekday/weekend shows weekday activity is less compared to weekend. 
 
-## end of story.
