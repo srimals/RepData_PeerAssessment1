@@ -171,14 +171,16 @@ Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minut
 mock.table$weektype <- as.factor(ifelse(weekdays(mock.table$date) %in% c("Saturday","Sunday"), "weekend", "weekday"))
 
 mock.table.by.weektype.and.interval <- mock.table[,mean(steps),by=c("weektype","interval")]
-rename(mock.table.by.weektype.and.interval, c("V1"="avg"))
+mock.table.by.weektype.and.interval <- rename(mock.table.by.weektype.and.interval, c("V1"="avg"))
+
 library(lattice)
 
 panel.plot <- xyplot(avg ~ interval | factor(weektype), data=mock.table.by.weektype.and.interval, 
        type = 'l',
-       main="Comparision of Average steps by Interval between weekend and weekdays",
-       xlab="Interval in 5 minutes",
-       ylab="Average # of Steps Taken")
+       main="",
+       xlab="Interval",
+       ylab="Number of steps",
+       layout=c(1,2))
 print (panel.plot)
 ```
 
